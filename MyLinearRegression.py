@@ -28,8 +28,8 @@ class LinearRegression:
         print("Intersept : ", self.__b0)
 
     def Predict(self, n):
-        inp_arr = np.array(n)
-        self.new_pred = self.__b0 + (self.__b1 * inp_arr)
+        self.inp_arr = np.array(n)
+        self.new_pred = self.__b0 + (self.__b1 * self.inp_arr)
 
     def MSE(self):
         self.diff = self.__Y - self.new_pred
@@ -43,7 +43,9 @@ class LinearRegression:
 
     def drawRegression(self):
         plt.scatter(self.__X, self.__Y)
-        plt.plot(self.__X, self.new_pred)
+        line_x = np.array([self.__X.min(), self.__X.max()])
+        line_y = self.__b0 + (self.__b1 * line_x)
+        plt.plot(line_x, line_y, color='red')
         plt.xlabel("Amount")
         plt.ylabel("Tip")
         plt.show()
