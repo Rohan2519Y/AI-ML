@@ -47,11 +47,16 @@ for i in y_train.columns:
     r = np.corrcoef(y_train[i], x_train)[0, 1]
     print(i, " : ", round(r, 3))
 
-MSE = np.mean((np.array(x_train) - y) ** 2)
-print("MSE: ", MSE)
+MSE_train = np.mean((np.array(x_train) - y) ** 2)
+print("MSE train: ", MSE_train)
 
-plt.scatter(x_train, y)
-plt.plot([x_train.min(), x_train.max()], [x_train.min(), x_train.max()], color='red')
+X_test = np.hstack((np.ones((len(y_test), 1)), y_test.values))
+y_pred_test = X_test @ A
+MSE_test = np.mean((np.array(x_test) - y_pred_test) ** 2)
+print("MSE test: ", MSE_test)
+
+plt.scatter(x_test, y_pred_test)
+plt.plot([x_test.min(), x_test.max()], [x_test.min(), x_test.max()], color='red')
 plt.xlabel("Actual Price")
 plt.ylabel("Predicted Price")
 plt.show()
