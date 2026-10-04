@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import matplotlib.pyplot as plt
 
 class Kmean:
 
@@ -40,3 +41,9 @@ class Kmean:
 Data = np.array([2, 4, 10, 12, 3, 20, 30, 11, 25])
 model = Kmean(Data, 4, 11)
 print(model.fit())
+
+cluster = np.where(model.M1_Cluster < model.M2_Cluster, 0, 1)
+plt.scatter(Data, np.zeros(len(Data)), c=cluster, cmap="coolwarm")
+plt.scatter([model.M1, model.M2], [0, 0], c="k", marker="*", s=200, label="Centroids")
+plt.legend()
+plt.show()
